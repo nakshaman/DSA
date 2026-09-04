@@ -1,13 +1,20 @@
-int lengthOfLongestSubstring(vector<char>& s) {
+
+#include <iostream>
+using namespace std;
+
+int lengthOfLongestSubstring(vector<char> &s)
+{
     unordered_map<char, int> lastSeen;
     int left = 0;
     int maxLength = 0;
 
-    for (int right = 0; right < s.size(); right++) {
+    for (int right = 0; right < s.size(); right++)
+    {
         char currentChar = s[right];
 
         // If character was seen before AND it's inside the current window
-        if (lastSeen.find(currentChar) != lastSeen.end() && lastSeen[currentChar] >= left) {
+        if (lastSeen.find(currentChar) != lastSeen.end() && lastSeen[currentChar] >= left)
+        {
             left = lastSeen[currentChar] + 1;
         }
 
@@ -18,9 +25,11 @@ int lengthOfLongestSubstring(vector<char>& s) {
     return maxLength;
 }
 
-int main() {
+int main()
+{
     vector<string> tests = {"abcabcbb", "bbbbb", "pwwkew", "", " ", "au"};
-    for (auto& t : tests) {
+    for (auto &t : tests)
+    {
         vector<char> s(t.begin(), t.end());
         cout << t << " -> " << lengthOfLongestSubstring(s) << endl;
     }
