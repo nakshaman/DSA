@@ -1,25 +1,73 @@
 #include <iostream>
 using namespace std;
-int majorityElement(vector<int> &nums)
+
+int majorityElementBrute(vector<int> &nums)
 {
-    int maxi = (*max_element(nums.begin(), nums.end()));
-    vector<int> hash(maxi+1, 0);
-    for (int i = 0; i < hash.size(); i++)
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
     {
-        hash[nums[i]] += 1;
-    }
-    int maxLimit = nums.size() / 2;
-    cout << maxLimit << endl;
-    int ans = -1;
-    for (int i = 0; i <= maxi; i++)
-    {
-        if (hash[i] >= maxLimit)
+        int countFreq = 0;
+        for (int j = 0; j < n; j++)
         {
-            ans = i;
-            break;
+            if (nums[i] == nums[j])
+            {
+                countFreq++;
+                if (countFreq > (n / 2))
+                {
+                    return nums[i];
+                }
+            }
         }
     }
-    return ans;
+    return -1;
+}
+int majorityElementBetter(vector<int> &nums)
+{
+    if (nums.size() == 1)
+        return nums[0];
+    int n = nums.size();
+    unordered_map<int, int> mpp;
+    for (int i = 0; i < n; i++)
+    {
+        mpp[nums[i]] += 1;
+    }
+    for (auto it : mpp)
+    {
+        if (it.second > (n / 2))
+        {
+            return it.first;
+        }
+    }
+    return -1;
+}
+int majorityElementOptimal(vector<int> &nums)
+{
+    int n = nums.size();
+    int ele = nums[0];
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (count == 0)
+        {
+            ele = nums[i];
+            count++;
+        }
+        else if (nums[i] == ele)
+            count++;
+        else
+            count--;
+    }
+    int countAns = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (nums[i] == ele)
+        {
+            countAns++;
+        }
+    }
+    if (countAns > (n / 2))
+        return ele;
+    return -1;
 }
 int main()
 {
@@ -30,6 +78,6 @@ int main()
     {
         cin >> nums[i];
     }
-    cout << majorityElement(nums);
+    // cout << majorityElementBrute(nums);
     return 0;
 }
