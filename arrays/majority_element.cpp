@@ -78,6 +78,6 @@ int main()
     {
         cin >> nums[i];
     }
-    // cout << majorityElementBrute(nums);
+    cout << majorityElementOptimal(nums);
     return 0;
 }
