@@ -40,6 +40,24 @@ int subarrayWithSumKCountOptimal(vector<int> arr, int target)
     }
     return count;
 }
+int subarrayWithSumKCountOptimal2(vector<int> arr, int target)
+
+{
+
+    int n = arr.size();
+    int sum = 0;
+    int count = 0;
+    unordered_map<int, int> mpp;
+    mpp[0] = 1;
+    for (int i = 0; i < n; i++)
+    {
+        sum += arr[i];
+        int rem = sum - target;
+        count += mpp[rem];
+        mpp[sum]++;
+    }
+    return count;
+}
 int main()
 {
     int n;
