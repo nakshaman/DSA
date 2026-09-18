@@ -41,9 +41,7 @@ int subarrayWithSumKCountOptimal(vector<int> arr, int target)
     return count;
 }
 int subarrayWithSumKCountOptimal2(vector<int> arr, int target)
-
 {
-
     int n = arr.size();
     int sum = 0;
     int count = 0;
